@@ -1,15 +1,14 @@
 require('dotenv').config();
-const AWS = require('aws-sdk');
+const aws = require('aws-sdk');
 
-// Configure the AWS SDK for DigitalOcean Spaces
-const spacesEndpoint = new AWS.Endpoint('nyc3.digitaloceanspaces.com'); // Change to your region endpoint
-const s3 = new AWS.S3({
+const spacesEndpoint = new aws.Endpoint('nyc3.digitaloceanspaces.com');
+const s3 = new aws.S3({
   endpoint: spacesEndpoint,
-  accessKeyId: process.env.DO_SPACES_ACCESS_KEY, // Set your keys in environment variables
+  accessKeyId: process.env.DO_SPACES_ACCESS_KEY,
   secretAccessKey: process.env.DO_SPACES_SECRET_KEY
 });
 
-const bucketName = 'your-space-name'; // Replace with your bucket name
+const bucketName = process.env.DO_SPACES_BUCKET_NAME;
 
 async function changeAcls() {
   try {
